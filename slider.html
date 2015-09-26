@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Hackathon Sante Nancy</title>
+
+        <link href="vendors/bower_components/jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet">
+        <link href="vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+        <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        <link href="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
+        <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="container mt100">
+			<div class="row">
+				<div class="col-lg-12 mb20">
+					<img class="content-image" src="img/scanner/export0000.JPG">
+				</div>
+				<div class="col-lg-12">
+
+					<div id="slider"></div>
+					
+					<p class="mt20">Your slider has a value of <span id="slider-value"></span></p>
+				
+				</div>
+			</div>
+		</div>
+	</body>
+
+    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="vendors/bower_components/jquery-ui-1.11.4/jquery-ui.js"></script>
+
+	<script type="text/javascript">
+
+		var extension = ".JPG";
+		var nameFile = "export";
+
+		$("#slider").slider({
+            value: 0,
+            min: 0,
+            max: 100,
+            step: 1,
+            slide: function( event, ui ) {
+                $( "#slider-value" ).html( ui.value );
+                
+                	if (ui.value < 10) {
+	                	$('.content-image').replaceWith("<img class='content-image' src='img/scanner/export000"+ui.value+".JPG'>");
+                	} else if (ui.value >= 10 && ui.value < 100) {
+                		$('.content-image').replaceWith("<img class='content-image' src='img/scanner/export00"+ui.value+".JPG'>");
+                	} else if (ui.value >= 100 && ui.value < 1000) {
+                		$('.content-image').replaceWith("<img class='content-image' src='img/scanner/export0"+ui.value+".JPG'>");
+                	} else if (ui.value >= 1000 && ui.value < 9999) {
+                		$('.content-image').replaceWith("<img class='content-image' src='img/scanner/export"+ui.value+".JPG'>");
+                	}
+				
+            }
+		});
+
+		$( "#slider-value" ).html(  $('#slider').slider('value') );
+
+
+
+	</script>
+
+</html>
