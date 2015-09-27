@@ -18,6 +18,7 @@
     <link href="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
     <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css"
           rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery.modal.css"/>
 
     <!-- CSS -->
     <!-- <link href="css/app.min.1.css" rel="stylesheet"> -->
@@ -27,7 +28,7 @@
     <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendors/bower_components/jquery-ui-1.11.4/jquery-ui.js"></script>
     <script src="js/spinner.js"></script>
-
+    <script src="js/jquery.modal.js"></script>
 </head>
 
 <body>

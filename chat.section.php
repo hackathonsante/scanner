@@ -4,10 +4,11 @@ use App\Tools\Gravatar;
 use App\Tools\Request;
 
 
-
+session_start();
 include_once "/vendor/autoload.php";
 
-    $chatlist = Request::perform("chatlist");
+    $myid = $_SESSION['me']->id;
+    $chatlist = Request::perform("chatlist/{$myid}");
     $userlist = Request::perform("userlist");
     $config = Config::getConfig("kinder");
     if (empty($chatlist)){
@@ -17,6 +18,12 @@ include_once "/vendor/autoload.php";
     $old = $chatlist[0]->kinder;
 
  ?>
+<div id="ex1" style="display:none;">
+   <span id="nameadd"></span>
+    <input type="hidden" name="idadd" id="idadd" value=""/>
+   <button id="addToConv">Ajouter a la conversation</button>
+</div>
+
 
 
 <div id="chat-section">
@@ -62,7 +69,7 @@ include_once "/vendor/autoload.php";
             <div role="tabpanel" class="tab-pane fade" id="annuaire">
                     <div class="listview">
                         <?php foreach($userlist as $user): ?>
-                        <a class="lv-item" href="#">
+                        <a class="lv-item lv-item-users" href="#" data-id="<?=$user->id?>" data-name="<?=$user->name?>">
                             <div class="media">
                                 <div class="pull-left p-relative">
                                     <img class="lv-img-sm" src="<?php echo Gravatar::get($user->email) ?>" alt="">
@@ -95,6 +102,14 @@ include_once "/vendor/autoload.php";
             $.get("chat.content.php?id="+id).done(function(data){
                 $("#chat-content").html(data);
             });
-        })
+        });
+
+        $(".lv-item-users").click(function(){
+            console.log("test");
+            var id = $(this).attr("data-id");
+            $("#ex1").modal();
+            $("#idadd").val(id);
+            $("#nameadd").text($(this).attr("data-name"));
+        });
     });
 </script>

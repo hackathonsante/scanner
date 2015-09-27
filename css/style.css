@@ -118,6 +118,11 @@ p.section-listview {
     height: 630px;
     min-height: 630px;
 }
+.modal {
+    display: none;
+    width: 710px;
+    height: 700px;
+}
 
 
 
