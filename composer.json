@@ -1,0 +1,13 @@
+{
+    "name": "yannis/scanner",
+    "authors": [
+        {
+            "name": "yannis berrouag",
+            "email": "yannis.berrouag@gmail.com"
+        }
+    ],
+    "require": {},
+  "autoload": {
+    "psr-4": {"App\\": "App/"}
+  }
+}

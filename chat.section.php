@@ -1,9 +1,20 @@
-<?php 
-    
-    $url_api = "http://10.45.18.223:3000/api/v1/chatlist";
-    $json = file_get_contents($url_api);
-    $obj = json_decode($json);
-    var_dump($obj);
+<?php
+use App\Config\Config;
+use App\Tools\Gravatar;
+use App\Tools\Request;
+
+
+
+include_once "/vendor/autoload.php";
+
+    $chatlist = Request::perform("chatlist");
+    $userlist = Request::perform("userlist");
+    $config = Config::getConfig("kinder");
+    if (empty($chatlist)){
+        echo "vous n'avez pas encore de conversations";
+        die;
+    }
+    $old = $chatlist[0]->kinder;
 
  ?>
 
@@ -22,148 +33,68 @@
     <div id="tab-content-chan">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="chan">
-                <p class="section-listview">Services</p>
+                <p class="section-listview"><?=$config[$chatlist[0]->kinder]?></p>
+
+                <?php foreach ($chatlist as $k => $chat):?>
+                    <?php if ($chat->kinder != $old):?>
+                        <p class="section-listview"><?=$config[$chat->kinder]?></p>
+                    <?php $old = $chat->kinder; endif ?>
+
                 <div role="presentation" class="listview">
-                    <a id="chat1" class="lv-item active" href="#chat-content1" role="tab" data-toggle="tab">
+                    <a id="chat<?=$chat->id?>" class="lv-item <?php if ($k == 0) echo 'active' ;?> conv" data-id="<?=$chat->id?>" href="#chat-content<?=$chat->id?>">
                         <div class="media">
                             <div class="pull-left p-relative">
                                 <img class="lv-img-sm" src="img/profile-pics/2.jpg" alt="">
                                 <i class="chat-status-busy"></i>
                             </div>
                             <div class="media-body">
-                                <div class="lv-title">Oncologie</div>
-                                <small class="lv-small">5 personnes connectées</small>
+                                <div class="lv-title"><?=$chat->title?></div>
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <p class="section-listview">Patients</p>
-                <div role="presentation" class="listview">
-                    <a id="chat2" class="lv-item" href="#chat-content2" role="tab" data-toggle="tab">
-                        <div class="media">
-                            <div class="pull-left p-relative">
-                                <img class="lv-img-sm" src="img/profile-pics/2.jpg" alt="">
-                                <i class="chat-status-busy"></i>
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">Jonathan Morris</div>
-                                <small class="lv-small">Available</small>
-                            </div>
-                        </div>
-                    </a>
+                <?php  endforeach;?>
                 </div>
 
-                <p class="section-listview">Privés</p>
-                <div class="listview">
-                 
-
-                    <a id="chat3" class="lv-item" href="#chat-content3" role="tab" data-toggle="tab">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="lv-img-sm" src="https://secure.gravatar.com/avatar/b7fb752b4fe725de8bd4a3334661f3c0" alt="">
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">Hugo Meloni</div>
-                                <small class="lv-small">Last seen 3 hours ago</small>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a id="chat4" class="lv-item" href="#chat-content4" role="tab" data-toggle="tab">
-                        <div class="media">
-                            <div class="pull-left p-relative">
-                                <img class="lv-img-sm" src="https://scontent.xx.fbcdn.net/hphotos-ash2/v/t1.0-9/10896882_10152658296291089_5290786946191292517_n.jpg?oh=8b407744a47313016aacda2c3a907072&oe=56A4E9CD" alt="">
-                                <i class="chat-status-online"></i>
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">Aurélien Lambert</div>
-                                <small class="lv-small">Disponible</small>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="lv-item" href="#">
-                        <div class="media">
-                            <div class="pull-left p-relative">
-                                <img class="lv-img-sm" src="https://scontent.xx.fbcdn.net/hphotos-xal1/t31.0-8/11226016_10153014446676879_2611767396701923891_o.jpg" alt="">
-                                <i class="chat-status-online"></i>
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">David Lakomski</div>
-                                <small class="lv-small">Availble</small>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="lv-item" href="#">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="lv-img-sm" src="img/profile-pics/5.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">Bill Phillips</div>
-                                <small class="lv-small">Last seen 3 days ago</small>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="lv-item" href="#">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="lv-img-sm" src="img/profile-pics/6.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">Wendy Mitchell</div>
-                                <small class="lv-small">Last seen 2 minutes ago</small>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="lv-item" href="#">
-                        <div class="media">
-                            <div class="pull-left p-relative">
-                                <img class="lv-img-sm" src="img/profile-pics/7.jpg" alt="">
-                                <i class="chat-status-busy"></i>
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">Teena Bell Ann</div>
-                                <small class="lv-small">Busy</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
 
             <div role="tabpanel" class="tab-pane fade" id="annuaire">
                     <div class="listview">
+                        <?php foreach($userlist as $user): ?>
                         <a class="lv-item" href="#">
                             <div class="media">
                                 <div class="pull-left p-relative">
-                                    <img class="lv-img-sm" src="img/profile-pics/2.jpg" alt="">
+                                    <img class="lv-img-sm" src="<?php echo Gravatar::get($user->email) ?>" alt="">
                                     <i class="chat-status-busy"></i>
                                 </div>
                                 <div class="media-body">
-                                    <div class="lv-title">Jonathan Morris</div>
-                                    <small class="lv-small">Available</small>
+                                    <div class="lv-title"><?=$user->name?></div>
                                 </div>
                             </div>
                         </a>
+                        <?php endforeach;?>
 
-                        <a class="lv-item" href="#">
-                            <div class="media">
-                                <div class="pull-left p-relative">
-                                    <img class="lv-img-sm" src="img/profile-pics/3.jpg" alt="">
-                                    <i class="chat-status-online"></i>
-                                </div>
-                                <div class="media-body">
-                                    <div class="lv-title">Fredric Mitchell Jr.</div>
-                                    <small class="lv-small">Availble</small>
-                                </div>
-                            </div>
-                        </a>
                     </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        var  id = $(".conv.active").attr("data-id");
+        $.get("chat.content.php?id="+id).done(function(data){
+            $("#chat-content").html(data);
+        });
+
+        $(".conv").click(function(){
+            $(".active.conv").removeClass("active");
+            $(this).addClass("active");
+            var id = $(this).attr("data-id");
+            $.get("chat.content.php?id="+id).done(function(data){
+                $("#chat-content").html(data);
+            });
+        })
+    });
+</script>
