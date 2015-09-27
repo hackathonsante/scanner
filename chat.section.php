@@ -19,9 +19,10 @@ include_once "/vendor/autoload.php";
 
  ?>
 <div id="ex1" style="display:none;">
-   <span id="nameadd"></span>
+   <p id="nameadd" style="text-align: center;font-size: 18px; "></p>
     <input type="hidden" name="idadd" id="idadd" value=""/>
-   <button id="addToConv">Ajouter a la conversation</button>
+
+    <button id="addToConv" class="btn btn-primary btn-sm m-t-10 send-button" >Ajouter a la conversation</button>
 </div>
 
 
