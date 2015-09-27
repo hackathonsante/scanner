@@ -23,6 +23,7 @@
                     <li>
                         <a href=""><i class="zmdi zmdi-settings"></i> Réglages</a>
                     </li>
+                    
 <!--                     <li>
                         <a href=""><i class="zmdi zmdi-time-restore"></i> Logout</a>
                     </li>
@@ -30,8 +31,10 @@
             </div>
 
             <ul class="main-menu">
-                <li><a href="index.php"><i class="zmdi zmdi-home"></i> Home</a></li>
-                <li><a href="message.php"><i class="zmdi zmdi-comments"></i> Home</a></li>
+                <li><a href="accueil.php"><i class="zmdi zmdi-home"></i> Accueil</a></li>
+                <li><a href="message.php"><i class="zmdi zmdi-comments"></i> Messages</a></li>
+                <li><a href="home.php"><i class="zmdi zmdi-lock"></i> Se déconnecter</a></li>
+                    
                 <!-- <li><a href="typography.html"><i class="zmdi zmdi zmdi-format-underlined"></i> Typography</a></li>
                 <li class="sub-menu">
                     <a href=""><i class="zmdi zmdi-widgets"></i> Widgets</a>
